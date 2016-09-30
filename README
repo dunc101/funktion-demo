@@ -1,0 +1,62 @@
+1.) Create your java functions (or groovy or scala... etc).  Example in com.example.Main class
+2.) Create a funktion.yml file inside src/main/resources indicating the methods you want to expose
+3.) Add the following to your pom.xml
+
+
+For this example to work I had to include the following in my pom.xml
+----------------------------------------
+<parent>
+    <groupId>io.fabric8.funktion</groupId>
+    <artifactId>funktion-project</artifactId>
+    <version>1.0.29</version> <!-- Enter the updated version here --->
+</parent>
+  
+  
+  <!-- Dependency -->
+<dependency>
+	<groupId>io.fabric8.funktion</groupId>
+	<artifactId>funktion-runtime</artifactId>
+</dependency>
+		
+<!-- Plugins -->		
+<plugin>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-maven-plugin</artifactId>
+</plugin>
+
+<plugin>
+	<groupId>io.fabric8</groupId>
+	<artifactId>fabric8-maven-plugin</artifactId>
+</plugin>
+  
+<!-- Profiles -->
+<profile>
+	<id>k8s</id>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>fabric8-maven-plugin</artifactId>
+				<configuration>
+					<enricher>
+						<config>
+							<fmp-service>
+								<type>LoadBalancer</type>
+							</fmp-service>
+						</config>
+					</enricher>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>resource</goal>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</profile>
+  ---------------------------------------------
+  
