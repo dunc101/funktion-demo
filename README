@@ -1,8 +1,6 @@
 1.) Create your java functions (or groovy or scala... etc).  Example in com.example.Main class
 2.) Create a funktion.yml file inside src/main/resources indicating the methods you want to expose
 3.) Add the following to your pom.xml
-
-
 For this example to work I had to include the following in my pom.xml
 ----------------------------------------
 <parent>
@@ -59,4 +57,5 @@ For this example to work I had to include the following in my pom.xml
 	</build>
 </profile>
   ---------------------------------------------
+  4.) Run on your local with mvn spring-boot:run
   
